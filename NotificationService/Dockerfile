@@ -1,5 +1,12 @@
-FROM openjdk:11-jdk-slim
+
+FROM eclipse-temurin:11-jdk
+
 WORKDIR /app
+
+
 COPY . .
+
 RUN javac -cp ".:lib/*" NotificationService.java
+
+
 CMD ["java", "-cp", ".:lib/*", "NotificationService"]
