@@ -8,7 +8,7 @@ The system is designed with independent services handling specific domains, conn
 
 ```mermaid
 graph TD
-    Client[Client Python] -->|http / status| API[API GATEWAY Flask]
+    [Client Python] -->|http / status|[API GATEWAY Flask]
     API -->|gRPC Request / Response ACK-ERR| US[User Service Py gRPC]
     US -->|insert / ACK-ERR| DB[(MongoDB)]
     US -->|STOMP pub if success| Topic{Topic}
