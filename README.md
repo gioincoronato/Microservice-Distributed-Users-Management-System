@@ -39,4 +39,30 @@ Below is a real-time demonstration of the test client executing CRUD operations,
 
 <video src="https://github.com/user-attachments/assets/eac232f8-6d4d-426f-8ea3-f204225d0312" autoplay loop muted playsinline width="100%"></video>
 
+## Prerequisites
+
+Since the entire microservices ecosystem is containerized, the only requirements to run this project locally are:
+* **Docker**
+* **Docker Compose**
+
+## Setup and Execution
+
+1. **Clone the repository:**
+   ```bash
+   git clone [https://github.com/gioincoronato/Microservice-Distributed-Users-Managment-System.git](https://github.com/gioincoronato/Microservice-Distributed-Users-Managment-System.git)
+   cd Microservice-Distributed-Users-Managment-System
+Build and start the microservices:
+Bring up the API Gateway, User Service, Notification Service, MongoDB, and the Message Broker all at once using Docker Compose:
+Bash
+docker-compose up --build
+Note: Wait a few moments for all containers to initialize and for the database and message broker to be ready to accept connections.
+Run the test client:
+Once the infrastructure is up and running, you can execute the Python test client to simulate traffic and see the microservices in action. Open a new terminal window and run:
+Bash
+python test_client/client.py
+You will see the logs in your Docker terminal updating in real-time as the HTTP requests are translated into gRPC calls, data is saved to MongoDB, and asynchronous notifications are triggered.
+Stop the environment:
+To cleanly shut down all containers and remove the created networks:
+Bash
+docker-compose down
 
