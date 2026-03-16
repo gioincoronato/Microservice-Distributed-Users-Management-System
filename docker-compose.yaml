@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  mongodb:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+
+  activemq:
+    image: rmohr/activemq:latest
+    ports:
+      - "61616:61616"
+      - "61613:61613"
+      - "8161:8161"
+
+  userservice:
+    build: ./user_service
+    depends_on:
+      - mongodb
+      - activemq
+
+  apigateway:
+    build: ./api_gateway
+    depends_on:
+      - userservice
+    ports:
+      - "5000:5000"
+
+  notificationservice:
+    build: ./NotificationService
+    depends_on:
+      - activemq

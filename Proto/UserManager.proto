@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+service UserManager{
+    rpc AddUser(AddUserRequest) returns(User);
+    rpc GetUser(GetUserRequest) returns(User);
+    rpc DeleteUser(DeleteUserRequest) returns(DeleteAck);
+    rpc GetList(EmptyRequest) returns(stream User);
+}
+
+message AddUserRequest{
+    string email = 1;
+    string name = 2;
+}
+
+message User{
+    string id = 1;
+    string email = 2;
+    string name = 3;
+    string created_at = 4;
+}
+
+message GetUserRequest{
+    string id = 1;
+}
+
+message DeleteUserRequest{
+    string id = 1;
+}
+
+message DeleteAck{
+    string delete_ack = 1;
+}
+
+message EmptyRequest{
+
+}
