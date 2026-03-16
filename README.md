@@ -37,9 +37,6 @@ The data flow is designed to be fast and non-blocking:
 Below is a real-time demonstration of the test client executing CRUD operations, alongside the live Docker logs showing the microservices communicating and the database updating:
 
 
-
-https://github.com/user-attachments/assets/eac232f8-6d4d-426f-8ea3-f204225d0312
-
 <video src="https://github.com/user-attachments/assets/eac232f8-6d4d-426f-8ea3-f204225d0312" autoplay loop muted playsinline width="100%"></video>
 
 
