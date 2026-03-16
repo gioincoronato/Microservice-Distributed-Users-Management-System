@@ -1,15 +1,26 @@
-# Distributed Microservices User Management System
+#Distributed Microservices User Management System
+A robust, containerized microservices architecture for managing user accounts and asynchronous notifications.
 
-A robust, containerized microservices architecture built to demonstrate inter-service communication using REST, gRPC, and asynchronous message brokering (STOMP/JMS).
+Built as a proof-of-concept to demonstrate modern backend patterns, this project integrates heterogeneous technologies including Python, Java, Flask, gRPC, REST APIs, MongoDB, and Message Brokers, all fully orchestrated with Docker.
 
-## Architecture Overview
+Architecture Overview
+The system is designed with scalability and decoupling in mind. The architecture consists of the following isolated components:
+Test Client (Python): Simulates external HTTP requests to interact with the system.
+API Gateway (Python/Flask): The single entry point for external REST/HTTP calls. It routes traffic and translates HTTP requests into gRPC calls for internal services.
+User Service (Python/gRPC): The core business logic service. It handles high-performance gRPC requests from the Gateway, performs CRUD operations, and manages data persistence.
+Database (MongoDB): A NoSQL database used by the User Service to store user documents.
+Message Broker (Topic): Handles asynchronous event-driven communication (using STOMP pub / JMS sub). Whenever a user is successfully created, an event is published here.
+Notification Service (Java): An independent background service acting as a subscriber. It listens to the message broker topic via JMS to trigger post-creation workflows (e.g., sending welcome emails/notifications).
 
-The system is designed with independent services handling specific domains, connected through an API Gateway. The flow matches the following architecture:
-
-```mermaid
 graph TD
-    [Client Python] -->|http / status|[API GATEWAY Flask]
-    API -->|gRPC Request / Response ACK-ERR| US[User Service Py gRPC]
-    US -->|insert / ACK-ERR| DB[(MongoDB)]
-    US -->|STOMP pub if success| Topic{Topic}
-    Topic -->|JMS sub| NS[Notification SERVICE JAVA]
+    Client[Client Python] -->|HTTP Request| Gateway(API Gateway Flask)
+    Gateway -->|HTTP Status| Client
+    
+    Gateway -->|gRPC Request| UserService(User Service Py gRPC)
+    UserService -->|gRPC Response ACK/ERR| Gateway
+    
+    UserService -->|Insert| DB[(MongoDB)]
+    DB -->|ACK/ERR| UserService
+    
+    UserService -->|STOMP pub if success| Topic{Topic}
+    Topic -->|JMS sub| NotifService(Notification Service Java)
