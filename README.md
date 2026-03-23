@@ -1,6 +1,6 @@
 # Distributed Microservices User Management System
 
-A robust, containerized microservices architecture for managing user accounts and asynchronous notifications. 
+A robust, containerized distributed microservices architecture for managing user accounts and asynchronous notifications. 
 
 Built as a proof-of-concept to demonstrate modern backend patterns, this project integrates heterogeneous technologies:
 * **Python & Java**
