@@ -62,7 +62,7 @@ Below is a real-time demonstration of the test client executing CRUD operations,
 
 ## Prerequisites
 
-Since the entire microservices ecosystem is containerized, the only requirements to run this project locally are:
+Since the entire distributed microservices ecosystem is containerized, the only requirements to run this project locally are:
 * **Docker**
 * **Docker Compose**
 
